@@ -1,12 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './SnakeGame.css';
 
+/* The `const SnakeGame = () => {` is defining a functional component in React called `SnakeGame`. This
+component uses React hooks such as `useState`, `useEffect`, and `useCallback` to manage the state
+and lifecycle of the game. Inside this component, the game logic for a simple Snake game is
+implemented, including handling the movement of the snake, checking for collisions, updating the
+score, generating food, and handling game over scenarios. */
+
 const SnakeGame = () => {
     const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
     const [food, setFood] = useState({ x: Math.floor(Math.random() * 20) * 10, y: Math.floor(Math.random() * 20) * 10 });
     const [direction, setDirection] = useState({ x: 0, y: 0 });
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+
+    /* The `const moveSnake = useCallback(() => {` is defining a function called `moveSnake` using the
+    `useCallback` hook in React. This function is responsible for handling the movement of the snake
+    in the Snake game. */
 
     const moveSnake = useCallback(() => {
         const newHead = {
@@ -57,6 +67,10 @@ const SnakeGame = () => {
 
     
 
+    /* The `const handleKeyDown = (event) => {` is defining an event handler function in React. This
+    function is responsible for capturing keydown events on the window and updating the direction of
+    the snake based on the arrow keys pressed by the user. */
+
     const handleKeyDown = (event) => {
         switch (event.key) {
             case 'ArrowUp':
@@ -76,6 +90,17 @@ const SnakeGame = () => {
         }
     };
 
+    /* `const handlePlayAgain = () => {` is defining a function called `handlePlayAgain` in the
+    SnakeGame component. This function is responsible for resetting the game state when the user
+    wants to play again. When the user clicks the "Play Again" button rendered in the game
+    interface, this function is called. Inside the function, the following state values are reset to
+    their initial values:
+    - `snake`: Set to an array containing the initial position of the snake.
+    - `food`: Set to a new random position for the food item.
+    - `direction`: Set to { x: 0, y: 0 } to stop the snake from moving.
+    - `score`: Set to 0 to reset the score.
+    - `gameOver`: Set to false to indicate that the game is not over. */
+
     const handlePlayAgain = () => {
         setSnake([{ x: 10, y: 10 }]);
         setFood({ x: Math.floor(Math.random() * 20) * 10, y: Math.floor(Math.random() * 20) * 10 });
@@ -84,6 +109,11 @@ const SnakeGame = () => {
         setGameOver(false);
     };
 
+    /* The `return (` statement in the `SnakeGame` component is the start of the JSX (JavaScript XML)
+    syntax in React. It signifies the beginning of the return value of the functional component.
+    Inside the `return (` block, you define the structure of the component by returning JSX elements
+    that will be rendered in the DOM. */
+    
     return (
         <div className="game-container" onKeyDown={handleKeyDown} tabIndex="0">
             <div className="game-score">Score: {score}</div>
